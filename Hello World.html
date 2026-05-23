@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hello World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #202124;
+    --surface: #2d2e31;
+    --surface-2: #3c4043;
+    --text: #e8eaed;
+    --text-dim: #9aa0a6;
+    --google-blue: #4285F4;
+    --google-red:  #EA4335;
+    --google-yellow: #FBBC05;
+    --google-green: #34A853;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .bg-stripes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background:
+      repeating-linear-gradient(135deg,
+        transparent 0 80px,
+        var(--google-red) 80px 84px,
+        transparent 84px 180px,
+        var(--google-blue) 180px 184px,
+        transparent 184px 280px,
+        var(--google-yellow) 280px 284px,
+        transparent 284px 380px,
+        var(--google-green) 380px 384px
+      );
+  }
+
+  .glow {
+    position: fixed;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .glow.red    { background: var(--google-red);    top: -80px;  left: -80px; }
+  .glow.blue   { background: var(--google-blue);   top: -60px;  right: -80px; }
+  .glow.yellow { background: var(--google-yellow); bottom: -100px; left: 20%; }
+  .glow.green  { background: var(--google-green);  bottom: -80px;  right: 15%; }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    padding: 56px 64px;
+    border-radius: 16px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.3),
+      0 8px 24px rgba(0,0,0,0.4);
+    text-align: center;
+    max-width: 90vw;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--google-blue) 0 25%,
+      var(--google-red) 25% 50%,
+      var(--google-yellow) 50% 75%,
+      var(--google-green) 75% 100%);
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 500;
+    margin: 0 0 8px;
+    letter-spacing: -2px;
+  }
+  h1 .c1 { color: var(--google-blue); }
+  h1 .c2 { color: var(--google-red); }
+  h1 .c3 { color: var(--google-yellow); }
+  h1 .c4 { color: var(--google-blue); }
+  h1 .c5 { color: var(--google-green); }
+  h1 .c6 { color: var(--google-red); }
+
+  p.sub {
+    margin: 0 0 32px;
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--google-blue);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+  }
+  .btn:hover {
+    background: #5a95f5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transform: translateY(-1px);
+  }
+  .btn:active { transform: translateY(0); }
+
+  .dots {
+    margin-top: 28px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  .dot:nth-child(1) { background: var(--google-blue);   animation-delay: 0s;   }
+  .dot:nth-child(2) { background: var(--google-red);    animation-delay: 0.2s; }
+  .dot:nth-child(3) { background: var(--google-yellow); animation-delay: 0.4s; }
+  .dot:nth-child(4) { background: var(--google-green);  animation-delay: 0.6s; }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1);   opacity: 0.6; }
+    50%      { transform: scale(1.4); opacity: 1;   }
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-stripes"></div>
+  <div class="glow red"></div>
+  <div class="glow blue"></div>
+  <div class="glow yellow"></div>
+  <div class="glow green"></div>
+
+  <main class="card">
+    <div class="eyebrow">Material Design</div>
+    <h1>
+      <span class="c1">H</span><span class="c2">e</span><span class="c3">l</span><span class="c4">l</span><span class="c5">o</span>
+      <span> </span>
+      <span class="c4">W</span><span class="c6">o</span><span class="c3">r</span><span class="c5">l</span><span class="c2">d</span>
+    </h1>
+    <p class="sub">หน้าทดสอบสไตล์ Google Material บนพื้นดำเทา</p>
+    <button class="btn" onclick="alert('Hello, World!')">
+      Get Started
+    </button>
+    <div class="dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </main>
+</body>
+</html>
